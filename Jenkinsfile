@@ -1,11 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:16-alpine'
-            label 'docker'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    // agent {
+    //     docker {
+    //         image 'node:16-alpine'
+    //         label 'docker'
+    //         args '-v /var/run/docker.sock:/var/run/docker.sock'
+    //     }
+    // }
+    agent any
 
     environment {
         DOCKER_TEST_IMAGE = 'saxenapawan800/docker-react-app-tests'
