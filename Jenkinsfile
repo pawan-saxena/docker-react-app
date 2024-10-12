@@ -22,7 +22,7 @@ pipeline {
         stage('Build Docker Nginx Image') {
             steps {
                 script {
-                    sh 'docker build -t $DOCKER_PROD_IMAGE .'
+                    sh "docker build -t ${DOCKER_PROD_IMAGE} ."
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
                     writeFile file: 'Dockerrun.aws.json', text: """{
                         "AWSEBDockerrunVersion": "1",
                         "Image": {
-                            "Name": "$DOCKER_PROD_IMAGE",
+                            "Name": "${DOCKER_PROD_IMAGE}",
                             "Update": "true"
                         },
                         "Ports": [

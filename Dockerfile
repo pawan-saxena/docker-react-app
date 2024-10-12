@@ -10,6 +10,8 @@ COPY . .
 
 RUN npm run build
 
+RUN apk add --no-cache zip
+
 FROM nginx
 
 EXPOSE 80
