@@ -31,7 +31,7 @@ pipeline {
         stage('Build Docker Tests Image') {
             steps {
                 script {
-                    sh "docker build -f Dockerfile.dev -t $DOCKER_TEST_IMAGE ."
+                    sh 'docker build -f Dockerfile.dev -t $DOCKER_TEST_IMAGE .'
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    sh "docker run -e CI=true $DOCKER_TEST_IMAGE npm run test"
+                    sh 'docker run -e CI=true $DOCKER_TEST_IMAGE npm run test'
                 }
             }
         }
@@ -47,7 +47,7 @@ pipeline {
         stage('Build Docker Nginx Image') {
             steps {
                 script {
-                    sh "docker build -t $DOCKER_PROD_IMAGE ."
+                    sh 'docker build -t $DOCKER_PROD_IMAGE .'
                 }
             }
         }
@@ -55,7 +55,7 @@ pipeline {
         stage('Start Application') {
             steps {
                 script {
-                    sh "docker run -d -p 3000:3000 $DOCKER_PROD_IMAGE"
+                    sh 'docker run -d -p 3000:3000 $DOCKER_PROD_IMAGE'
                 }
             }
         }
