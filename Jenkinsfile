@@ -61,9 +61,7 @@ pipeline {
 
     post {
         always {
-            node {
-                sh 'docker system prune -f'
-            }
+            // sh 'docker system prune -f'
         }
     }
 }
