@@ -51,8 +51,22 @@ pipeline {
                 script {
                     withCredentials([aws(credentialsId: 'pawans-aws-account-creds-elasticbeanstalk', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                         sh 'aws s3 cp deployment.zip s3://$S3_BUCKET/$EB_APP_NAME/deployment-$BUILD_NUMBER.zip'
-                        sh 'eb init $EB_APP_NAME --region $AWS_REGION'
-                        sh 'eb deploy $EB_ENV_NAME --staged'
+                        // sh 'eb init $EB_APP_NAME --region $AWS_REGION'
+                        // sh 'eb deploy $EB_ENV_NAME --staged'
+                        sh """
+                        aws elasticbeanstalk create-application-version \
+                            --application-name $EB_APP_NAME \
+                            --version-label deployment-$BUILD_NUMBER \
+                            --source-bundle S3Bucket=$S3_BUCKET,S3Key=$EB_APP_NAME/deployment-$BUILD_NUMBER.zip \
+                            --region $AWS_REGION
+                        """
+                        
+                        sh """
+                        aws elasticbeanstalk update-environment \
+                            --environment-name $EB_ENV_NAME \
+                            --version-label deployment-$BUILD_NUMBER \
+                            --region $AWS_REGION
+                        """
                     }
                 }
             }
