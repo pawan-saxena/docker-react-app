@@ -27,26 +27,26 @@ pipeline {
             }
         }
 
-        // stage('Create Dockerrun.aws.json') {
-        //     steps {
-        //         script {
-        //             writeFile file: 'Dockerrun.aws.json', text: """{
-        //                 "AWSEBDockerrunVersion": "1",
-        //                 "Image": {
-        //                     "Name": "${DOCKER_PROD_IMAGE}",
-        //                     "Update": "true"
-        //                 },
-        //                 "Ports": [
-        //                     {
-        //                         "ContainerPort": "80"
-        //                     }
-        //                 ]
-        //             }"""
+        stage('Create Dockerrun.aws.json') {
+            steps {
+                script {
+                    writeFile file: 'Dockerrun.aws.json', text: """{
+                        "AWSEBDockerrunVersion": "1",
+                        "Image": {
+                            "Name": "${DOCKER_PROD_IMAGE}",
+                            "Update": "true"
+                        },
+                        "Ports": [
+                            {
+                                "ContainerPort": "80"
+                            }
+                        ]
+                    }"""
 
-        //             sh 'zip -r deployment.zip Dockerrun.aws.json'
-        //         }
-        //     }
-        // }
+                    sh 'zip -r deployment.zip Dockerrun.aws.json'
+                }
+            }
+        }
 
         // stage('Deploy to Elastic Beanstalk') {
         //     steps {
