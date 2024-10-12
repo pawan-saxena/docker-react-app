@@ -52,7 +52,7 @@ pipeline {
             }
         }
 
-        stage('Start Application..') {
+        stage('Start Application') {
             steps {
                 script {
                     sh 'docker run -d -p 80:80 $DOCKER_PROD_IMAGE'
