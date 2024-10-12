@@ -48,15 +48,15 @@ pipeline {
             }
         }
 
-        // stage('Deploy to Elastic Beanstalk') {
-        //     steps {
-        //         script {
-        //             sh 'aws s3 cp deployment.zip s3://$S3_BUCKET/$EB_APP_NAME/deployment-$BUILD_NUMBER.zip'
-        //             sh 'eb init $EB_APP_NAME --region $AWS_REGION'
-        //             sh 'eb deploy $EB_ENV_NAME --staged'
-        //         }
-        //     }
-        // }
+        stage('Deploy to Elastic Beanstalk') {
+            steps {
+                script {
+                    sh 'aws s3 cp deployment.zip s3://$S3_BUCKET/$EB_APP_NAME/deployment-$BUILD_NUMBER.zip'
+                    sh 'eb init $EB_APP_NAME --region $AWS_REGION'
+                    sh 'eb deploy $EB_ENV_NAME --staged'
+                }
+            }
+        }
     }
 
     // post {
