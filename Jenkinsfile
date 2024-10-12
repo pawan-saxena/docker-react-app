@@ -8,8 +8,8 @@ pipeline {
         EB_APP_NAME = 'docker-react-app'
         EB_ENV_NAME = 'Docker-react-app-env'
         S3_BUCKET = 'elasticbeanstalk-us-east-1-869935086562'
-        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        // AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
+        // AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
     }
 
     stages {
