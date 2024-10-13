@@ -1,13 +1,12 @@
 pipeline {
-
     agent any
-    
     environment {
         DOCKER_PROD_IMAGE = 'saxenapawan800/docker-react-app'
         AWS_REGION = 'us-east-1'
         EB_APP_NAME = 'docker-react-app'
         EB_ENV_NAME = 'Docker-react-app-env'
         S3_BUCKET = 'elasticbeanstalk-us-east-1-869935086562'
+        VERSION_LABEL = 'Sample'
     }
 
     stages {
@@ -55,13 +54,13 @@ pipeline {
                         // sh 'eb deploy $EB_ENV_NAME --staged'
                         sh 'aws elasticbeanstalk create-application-version \
                             --application-name $EB_APP_NAME \
-                            --version-label deployment-$BUILD_NUMBER \
+                            --version-label $VERSION_LABEL \
                             --source-bundle S3Bucket=$S3_BUCKET,S3Key=$EB_APP_NAME/deployment-$BUILD_NUMBER.zip \
                             --region $AWS_REGION'
 
                         sh 'aws elasticbeanstalk update-environment \
                             --environment-name $EB_ENV_NAME \
-                            --version-label deployment-$BUILD_NUMBER \
+                            --version-label $VERSION_LABEL \
                             --region $AWS_REGION'
                     }
                 }
