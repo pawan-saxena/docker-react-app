@@ -10,7 +10,6 @@ pipeline {
         S3_BUCKET = 'elasticbeanstalk-us-east-1-869935086562'
     }
 
-
     stages {
         stage('Checkout code') {
             steps {
