@@ -61,7 +61,7 @@ pipeline {
 
                         sh 'aws elasticbeanstalk update-environment \
                             --environment-name $EB_ENV_NAME \
-                            --version-label Sample \
+                            --version-label deployment-$BUILD_NUMBER \
                             --region $AWS_REGION'
                     }
                 }
