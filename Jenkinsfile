@@ -1,7 +1,6 @@
 pipeline {
 
     agent any
-
     environment {
         DOCKER_PROD_IMAGE = 'saxenapawan800/docker-react-app'
         AWS_REGION = 'us-east-1'
